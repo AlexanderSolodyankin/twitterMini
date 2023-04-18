@@ -1,6 +1,9 @@
 package entity.post;
 
+import entity.user.Organization;
+import entity.user.Person;
 import entity.user.User;
+import entity.user.UserType;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,72 +19,72 @@ public class Post<T extends User> {
     public Post() {
     }
 
-    public Post(Integer id, T author, String them, String text, List<String> tags, LocalDateTime datePosts) {
-        this.id = id;
-        this.author = author;
-        this.them = them;
-        this.text = text;
-        this.tags = tags;
-        this.datePosts = datePosts;
-    }
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public Post<T> setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public T getAuthor() {
         return author;
     }
 
-    public void setAuthor(T author) {
+    public Post<T> setAuthor(T author) {
         this.author = author;
+        return this;
     }
 
     public String getThem() {
         return them;
     }
 
-    public void setThem(String them) {
+    public Post<T> setThem(String them) {
         this.them = them;
+        return this;
     }
 
     public String getText() {
         return text;
     }
 
-    public void setText(String text) {
+    public Post<T> setText(String text) {
         this.text = text;
+        return this;
     }
 
     public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
+    public Post<T> setTags(List<String> tags) {
         this.tags = tags;
+        return this;
     }
 
     public LocalDateTime getDatePosts() {
         return datePosts;
     }
 
-    public void setDatePosts(LocalDateTime datePosts) {
+    public Post<T> setDatePosts(LocalDateTime datePosts) {
         this.datePosts = datePosts;
+        return this;
     }
 
     @Override
     public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", author=" + author +
-                ", them='" + them + '\'' +
-                ", text='" + text + '\'' +
-                ", tags=" + tags +
-                ", datePosts=" + datePosts +
-                '}'+ '\'' ;
+        return String.format("Публикация: {\n"+
+                "Автор: [ %s ] %s ; \n" +
+                "Создано: %s ; \n"+
+                "Тема: %s ; \n" +
+                "Текст: %s ; \n" +
+                "Тэги: %s ; \n}",
+                author.getUserType(),
+                author.getUserType().equals(UserType.PERSON) ?( ((Person)author).getName() + " " + ((Person)author).getSerName()) :
+                        ((Organization)author).getName(),
+                getDatePosts(), getThem(), getText(), getTags());
     }
 }

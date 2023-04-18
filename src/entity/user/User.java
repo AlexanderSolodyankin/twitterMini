@@ -12,51 +12,48 @@ public abstract class User {
     public User() {
     }
 
-    public User(Integer id, String login, String password, LocalDateTime dataRegister, UserType userType) {
-        this.id = id;
-        this.login = login;
-        this.password = password;
-        this.dataRegister = dataRegister;
-        this.userType = userType;
-    }
-
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public User setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
+    public User setLogin(String login) {
         this.login = login;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public LocalDateTime getDataRegister() {
         return dataRegister;
     }
 
-    public void setDataRegister(LocalDateTime dataRegister) {
+    public User setDataRegister(LocalDateTime dataRegister) {
         this.dataRegister = dataRegister;
+        return this;
     }
 
     public UserType getUserType() {
         return userType;
     }
 
-    public void setUserType(UserType userType) {
+    public User setUserType(UserType userType) {
         this.userType = userType;
+        return this;
     }
 }

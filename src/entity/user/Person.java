@@ -12,37 +12,31 @@ public class Person extends User{
         this.setUserType(UserType.PERSON);
     }
 
-    public Person(Integer id, String login, String password,
-                  LocalDateTime dataRegister, UserType userType,
-                  String name, String serName, LocalDate dataBerth) {
-        super(id, login, password, dataRegister, userType);
-        this.name = name;
-        this.serName = serName;
-        this.dataBerth = dataBerth;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Person setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getSerName() {
         return serName;
     }
 
-    public void setSerName(String serName) {
+    public Person setSerName(String serName) {
         this.serName = serName;
+        return this;
     }
 
     public LocalDate getDataBerth() {
         return dataBerth;
     }
 
-    public void setDataBerth(LocalDate dataBerth) {
+    public Person setDataBerth(LocalDate dataBerth) {
         this.dataBerth = dataBerth;
+        return this;
     }
 
     @Override

@@ -15,38 +15,34 @@ public class Organization extends User{
         this.setUserType(UserType.ORGANIZATION);
     }
 
-    public Organization(Integer id, String login, String password,
-                        LocalDateTime dataRegister, UserType userType,
-                        String name, String occupation, LocalDate dataFounding) {
-        super(id, login, password, dataRegister, userType);
-        this.name = name;
-        this.occupation = occupation;
-        this.dataFounding = dataFounding;
-    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Organization setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getOccupation() {
         return occupation;
     }
 
-    public void setOccupation(String occupation) {
+    public Organization setOccupation(String occupation) {
         this.occupation = occupation;
+        return this;
     }
 
     public LocalDate getDataFounding() {
         return dataFounding;
     }
 
-    public void setDataFounding(LocalDate dataFounding) {
+    public Organization setDataFounding(LocalDate dataFounding) {
         this.dataFounding = dataFounding;
+        return this;
     }
+
     @Override
     public String toString() {
         return String.format("\n[%s] { \n" +

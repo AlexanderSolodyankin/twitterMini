@@ -159,7 +159,11 @@ public class Twitter {
                 List<User> usersListPrint = userHolder.getAllUsers();
                 if (usersListPrint == null) {
                     System.err.println("Хранилище Пользователей пусто (Отрефактить)");
-                } else usersListPrint.forEach(System.out::println);
+                } else {
+                    System.out.println("\033[0;34m");
+                    usersListPrint.forEach(System.out::println);
+                    System.out.println("\033[0m");
+                }
                 System.out.println("<<<<<<<<<< Конец Информации >>>>>>>>>>");
             }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

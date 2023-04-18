@@ -80,8 +80,28 @@ public class FileServiceImpl implements FileService {
             LocalDate dateBerth = LocalDate.parse(result[7]);
             User user;
             if(userType.equals(UserType.PERSON)){
-                user = new Person(id,login,password,registerDate,userType,name,secondName,dateBerth);
-            }else user = new Organization(id,login,password,registerDate,userType,name,secondName,dateBerth);
+                Person person = new Person();
+                person
+                        .setName(name)
+                        .setSerName(secondName)
+                        .setDataBerth(dateBerth)
+                        .setId(id)
+                        .setLogin(login)
+                        .setPassword(password)
+                        .setDataRegister(registerDate);
+                user = person;
+            }else {
+                Organization organization = new Organization();
+                organization
+                        .setName(name)
+                        .setOccupation(secondName)
+                        .setDataFounding(dateBerth)
+                        .setId(id)
+                        .setLogin(login)
+                        .setPassword(password)
+                        .setDataRegister(registerDate);
+                user = organization;
+            }
             userList.add(user);
         }
         return userList;
@@ -114,8 +134,29 @@ public class FileServiceImpl implements FileService {
             LocalDate dateBerth = LocalDate.parse(result[7]);
             User user;
             if(userType.equals(UserType.PERSON)){
-                user = new Person(id,login,password,registerDate,userType,name,secondName,dateBerth);
-            }else user = new Organization(id,login,password,registerDate,userType,name,secondName,dateBerth);
+              Person person = new Person();
+              person
+                      .setName(name)
+                      .setSerName(secondName)
+                      .setDataBerth(dateBerth)
+                      .setId(id)
+                      .setLogin(login)
+                      .setPassword(password)
+                      .setDataRegister(registerDate);
+              user = person;
+
+            }else {
+                Organization organization = new Organization();
+                organization
+                        .setName(name)
+                        .setOccupation(secondName)
+                        .setDataFounding(dateBerth)
+                        .setId(id)
+                        .setLogin(login)
+                        .setPassword(password)
+                        .setDataRegister(registerDate);
+                user = organization;
+            }
             userList.add(user);
         }
         return userList;
@@ -136,7 +177,10 @@ public class FileServiceImpl implements FileService {
             el = el.replace("{","");
             String[] postParams = el.split("}");
             int id = Integer.parseInt(postParams[0]);
-            User user = userList.stream().filter(x -> x.getLogin().equals(postParams[1])).findFirst().orElse(null);
+            User user = userList.stream()
+                    .filter(x -> x.getLogin().equals(postParams[1]))
+                    .findFirst()
+                    .orElse(null);
             if(user == null){
                 throw new FileDataHolderException("Пользователь не существует");
             }
@@ -145,7 +189,14 @@ public class FileServiceImpl implements FileService {
             List<String> tags = Arrays.asList(postParams[4].split(","));
             LocalDateTime datePostRegister = LocalDateTime.parse(postParams[5]);
 
-            Post<User> post = new Post<>(id,user,them,text,tags,datePostRegister);
+            Post<User> post = new Post<>();
+            post
+                    .setId(id)
+                    .setAuthor(user)
+                    .setThem(them)
+                    .setText(text)
+                    .setTags(tags)
+                    .setDatePosts(datePostRegister);
             readPostsList.add(post);
         }
         return readPostsList;
@@ -168,7 +219,10 @@ public class FileServiceImpl implements FileService {
             el = el.replace("{","");
             String[] postParams = el.split("}");
             int id = Integer.parseInt(postParams[0]);
-            User user = userList.stream().filter(x -> x.getLogin().equals(postParams[1])).findFirst().orElse(null);
+            User user = userList.stream()
+                    .filter(x -> x.getLogin().equals(postParams[1]))
+                    .findFirst()
+                    .orElse(null);
             if(user == null){
                 throw new FileDataHolderException("Пользователь не существует");
             }
@@ -177,7 +231,15 @@ public class FileServiceImpl implements FileService {
             List<String> tags = Arrays.asList(postParams[4].split(","));
             LocalDateTime datePostRegister = LocalDateTime.parse(postParams[5]);
 
-            Post<User> post = new Post<>(id,user,them,text,tags,datePostRegister);
+            Post<User> post = new Post<>();
+            post
+                    .setId(id)
+                    .setAuthor(user)
+                    .setThem(them)
+                    .setText(text)
+                    .setTags(tags)
+                    .setDatePosts(datePostRegister);
+
             readPostsList.add(post);
         }
         return readPostsList;
