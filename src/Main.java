@@ -6,6 +6,7 @@ public class Main {
         System.out.println("Twitter-Mini start");
             new Twitter();
         System.out.println("Twitter-Mini over");
+        //
     }
 
 }
