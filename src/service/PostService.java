@@ -1,9 +1,10 @@
-package mini.twter.service;
+package service;
 
-import mini.twter.holder.PostHolder;
-import mini.twter.entity.post.Post;
-import mini.twter.entity.user.UserType;
-import mini.twter.util.CommandKey;
+
+import entity.post.Post;
+import entity.user.UserType;
+import holder.PostHolder;
+import util.CommandKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,10 +1,10 @@
-package mini.twter.util;
+package util;
 
-import mini.twter.command.Command;
-import mini.twter.entity.post.Post;
-import mini.twter.service.CommandService;
-import mini.twter.service.PostService;
-import mini.twter.service.UserAuthService;
+import command.Command;
+import entity.post.Post;
+import service.CommandService;
+import service.PostService;
+import service.UserAuthService;
 
 import java.util.List;
 
@@ -27,27 +27,27 @@ public class CommandUtil {
             service.login();
             System.out.println("<<<<<<<<<<<<<<<<<<<<  Вход в систему завершон >>>>>>>>>>>>>>>>");
 
-        }else if (Command.LOGOUT.name().equals(CommandKey.getLine().toUpperCase())){
+        }else if (Command.LOGOUT.name().equals( CommandKey.getLine().toUpperCase())){
             System.out.println("<<<<<<<<<<<<<<<<<<<<  Выход из системы >>>>>>>>>>>>>>>>");
             service.logout();
             System.out.println("<<<<<<<<<<<<<<<<<<<<  Выход завершен >>>>>>>>>>>>>>>>");
 
-        }else if (Command.INFO.name().equals(CommandKey.getLine().toUpperCase())){
+        }else if (Command.INFO.name().equals( CommandKey.getLine().toUpperCase())){
             System.out.println("<<<<<<<<<<<<<<<<<<<<    Информация о пользователе >>>>>>>>>>>>>>>>");
             service.info();
             System.out.println("<<<<<<<<<<<<<<<<<<<<  Конец Информации >>>>>>>>>>>>>>>>");
 
-        }else if (Command.INFO_BY_LOGIN.name().equals(CommandKey.getLine().toUpperCase())){
+        }else if (Command.INFO_BY_LOGIN.name().equals( CommandKey.getLine().toUpperCase())){
             System.out.println("<<<<<<<<<<<<<<<<<<<<  Информация по логину >>>>>>>>>>>>>>>>");
             service.infoByLogin();
             System.out.println("<<<<<<<<<<<<<<<<<<<<  Конец Информации >>>>>>>>>>>>>>>>");
 
-        }else if (Command.INFO_ALL.name().equals(CommandKey.getLine().toUpperCase())){
+        }else if (Command.INFO_ALL.name().equals( CommandKey.getLine().toUpperCase())){
             System.out.println("<<<<<<<<<<<<<<<<<<<<  Информация о всех пользователях >>>>>>>>>>>>>>>>");
             service.infoAll();
             System.out.println("<<<<<<<<<<<<<<<<<<<<  Конец Информации >>>>>>>>>>>>>>>>");
 
-        }else if (Command.ADD_POST.name().equals(CommandKey.getLine().toUpperCase())) {
+        }else if (Command.ADD_POST.name().equals( CommandKey.getLine().toUpperCase())) {
             if(UserAuthService.getAunthUser() == null){
                 System.err.println("\nВы не авторезированны для создания публекации!!!!");
             }else {
@@ -56,21 +56,21 @@ public class CommandUtil {
                 System.out.println("<<<<<<<<<<<<<<<<<<<<  Публикация создана!!!  >>>>>>>>>>>>>>>>");
             }
 
-        }else if (Command.MY_POSTS.name().equals(CommandKey.getLine().toUpperCase())){
+        }else if (Command.MY_POSTS.name().equals( CommandKey.getLine().toUpperCase())){
             System.out.println("<<<<<<<<<<<<<<<<<<<<  Мои публикации  >>>>>>>>>>>>>>>>");
             System.out.println(postService.getMyPosts());
             System.out.println("<<<<<<<<<<<<<<<<<<<<  Конец моих публикаций  >>>>>>>>>>>>>>>>");
 
-        }else if (Command.ALL_POSTS.name().equals(CommandKey.getLine().toUpperCase())){
+        }else if (Command.ALL_POSTS.name().equals( CommandKey.getLine().toUpperCase())){
             System.out.println("<<<<<<<<<<<<<<<<<<<<  Все публикации  >>>>>>>>>>>>>>>>");
             System.out.println(postService.getAllPosts());
             System.out.println("<<<<<<<<<<<<<<<<<<<<  Конец  публикаций  >>>>>>>>>>>>>>>>");
 
-        }else if (Command.POSTS_BY_TAG.name().equals(CommandKey.getLine().toUpperCase())) {
+        }else if (Command.POSTS_BY_TAG.name().equals( CommandKey.getLine().toUpperCase())) {
             System.out.println("<<<<<<<<<<<<<<<<<<<<  Все публикации по Тэгу  >>>>>>>>>>>>>>>>");
             List<Post> list = postService.getAllPostsByTag();
             System.out.println( list == null || list.isEmpty()?
-                    "По  тэгу { " +  CommandKey.getLine() +" }публикаций не найдено" : list);
+                    "По  тэгу { " +   CommandKey.getLine() +" }публикаций не найдено" : list);
             System.out.println("<<<<<<<<<<<<<<<<<<<<  Конец  публикаций  >>>>>>>>>>>>>>>>");
 
         }else if (Command.POSTS_BY_LOGIN.name().equals(CommandKey.getLine().toUpperCase())) {

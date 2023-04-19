@@ -1,8 +1,9 @@
-package mini.twter.service;
+package service;
 
-import mini.twter.util.CommandKey;
-import mini.twter.holder.UserHolder;
-import mini.twter.entity.user.User;
+
+import entity.user.User;
+import holder.UserHolder;
+import util.CommandKey;
 
 public class UserAuthService {
     private static User aunthUser;

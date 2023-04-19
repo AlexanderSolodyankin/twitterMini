@@ -1,11 +1,11 @@
-package mini.twter.service;
+package service;
 
-import mini.twter.util.CommandKey;
-import mini.twter.holder.UserHolder;
-import mini.twter.entity.user.Organization;
-import mini.twter.entity.user.Person;
-import mini.twter.entity.user.User;
-import mini.twter.entity.user.UserType;
+import entity.user.Organization;
+import entity.user.Person;
+import entity.user.User;
+import entity.user.UserType;
+import holder.UserHolder;
+import util.CommandKey;
 
 import java.time.LocalDate;
 

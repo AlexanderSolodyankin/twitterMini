@@ -1,6 +1,4 @@
-package mini.twter;
-
-import mini.twter.util.CommandUtil;
+import util.CommandUtil;
 
 public class Main {
     public static void main(String[] args) {

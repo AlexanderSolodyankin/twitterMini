@@ -1,9 +1,11 @@
-package mini.twter.entity.post;
+package entity.post;
 
-import mini.twter.entity.user.Organization;
-import mini.twter.entity.user.Person;
-import mini.twter.entity.user.User;
-import mini.twter.entity.user.UserType;
+
+
+import entity.user.Organization;
+import entity.user.Person;
+import entity.user.User;
+import entity.user.UserType;
 
 import java.time.LocalDate;
 import java.util.List;

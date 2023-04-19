@@ -1,4 +1,4 @@
-package mini.twter.util;
+package util;
 
 import java.time.LocalDate;
 import java.util.Scanner;

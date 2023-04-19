@@ -1,7 +1,7 @@
-package mini.twter.command;
+package command;
 
 
-import mini.twter.holder.UserHolder;
+import holder.UserHolder;
 
 public enum Command {
      EXIT("Выход из программы."),

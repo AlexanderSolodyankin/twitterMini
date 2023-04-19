@@ -1,10 +1,13 @@
-package mini.twter.holder;
+package holder;
 
 
-import mini.twter.entity.post.Post;
-import mini.twter.service.UserAuthService;
+import entity.post.Post;
+import service.UserAuthService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PostHolder {
     private static Map<String, List<Post>> postMap = new HashMap<>();

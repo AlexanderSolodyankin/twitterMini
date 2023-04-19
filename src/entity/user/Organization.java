@@ -1,4 +1,4 @@
-package mini.twter.entity.user;
+package entity.user;
 
 import java.time.LocalDate;
 
