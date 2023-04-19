@@ -2,6 +2,7 @@ package service;
 
 import entity.user.User;
 import exaption.*;
+import exaption.input.exception.InputUserTypeException;
 
 import java.io.IOException;
 

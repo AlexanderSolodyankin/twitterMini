@@ -1,6 +1,6 @@
 package command;
 
-public enum Command {
+public enum Command  {
     EXIT,
     REGISTER,
     LOGIN,

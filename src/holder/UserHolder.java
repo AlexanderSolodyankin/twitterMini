@@ -8,8 +8,21 @@ import java.util.List;
 public class UserHolder {
     private  List<User> userList ;
 
-    public UserHolder() {
+    private static UserHolder userHolder;
+
+    public static synchronized UserHolder getInstans(){
+        if(userHolder == null){
+            userHolder = new UserHolder();
+        }
+        return userHolder;
+    }
+
+    private UserHolder() {
         userList = new ArrayList<>();
+    }
+
+    private UserHolder(List<User> userList) {
+        this.userList = userList;
     }
 
     public   User saveUser(User user){

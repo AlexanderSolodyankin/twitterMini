@@ -5,6 +5,7 @@ import entity.user.Person;
 import entity.user.User;
 import entity.user.UserType;
 import exaption.*;
+import exaption.input.exception.InputUserTypeException;
 import holder.UserHolder;
 import service.FileService;
 import service.UserRegistrationService;
@@ -21,8 +22,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private UserHolder userHolder;
     private FileService fileService;
 
-    public UserRegistrationServiceImpl(UserHolder userHolder) {
-        this.userHolder = userHolder;
+    public UserRegistrationServiceImpl() {
+        this.userHolder = UserHolder.getInstans();
         scan = new Scanner(System.in);
         fileService = new FileServiceImpl();
     }

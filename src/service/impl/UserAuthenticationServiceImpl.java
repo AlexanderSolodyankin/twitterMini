@@ -12,8 +12,8 @@ import java.util.Scanner;
 public class UserAuthenticationServiceImpl implements UserAuthenticationService {
     private UserHolder userHolder;
 
-    public UserAuthenticationServiceImpl(UserHolder userHolder) {
-        this.userHolder = userHolder;
+    public UserAuthenticationServiceImpl() {
+        this.userHolder = UserHolder.getInstans();
     }
 
     @Override

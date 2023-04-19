@@ -1,12 +1,12 @@
 package controler;
 
 import command.Command;
-import entity.post.Post;
 import entity.user.Organization;
 import entity.user.Person;
 import entity.user.User;
 import entity.user.UserType;
 import exaption.*;
+import exaption.input.exception.InputUserTypeException;
 import holder.PostHolder;
 import holder.UserHolder;
 import service.FileService;
@@ -19,7 +19,6 @@ import service.impl.UserAuthenticationServiceImpl;
 import service.impl.UserRegistrationServiceImpl;
 
 import java.io.IOException;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,7 +33,7 @@ public class Twitter {
 
     public Twitter() {
         fileService = new FileServiceImpl();
-        userHolder = new UserHolder();
+        userHolder = UserHolder.getInstans();
 
         new Thread() {
             @Override
@@ -52,8 +51,8 @@ public class Twitter {
             }
         }.start();
 
-        userRegistrationService = new UserRegistrationServiceImpl(userHolder);
-        authenticationService = new UserAuthenticationServiceImpl(userHolder);
+        userRegistrationService = new UserRegistrationServiceImpl();
+        authenticationService = new UserAuthenticationServiceImpl();
         postService = new PostServiceImpl(postHolder);
         userAuthentication = null;
         start();
@@ -110,6 +109,9 @@ public class Twitter {
                                     ((Person) userAuthentication).getName() + " " + ((Person) userAuthentication).getSerName() :
                                     ((Organization) userAuthentication).getName());
                 } catch (UserException | InputPasswordException | UserHoldException e) {
+                    System.out.println("\033[0;31m" + e.getClass().getName() + ": " + e.getMessage());
+                    System.out.println("\033[0m");
+                } catch (Exception e) {
                     System.out.println("\033[0;31m" + e.getClass().getName() + ": " + e.getMessage());
                     System.out.println("\033[0m");
                 }
