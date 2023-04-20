@@ -51,7 +51,7 @@ public class Twitter {
     }
 
 
-    public void start(){
+    public void start() {
 
         String commandIn;
         CommandExistential commandExistential;
@@ -67,7 +67,7 @@ public class Twitter {
                      UserHoldException e) {
                 System.out.println("\033[0;31m" + e.getClass().getName() + ": " + e.getMessage());
                 System.out.println("\033[0m");
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 System.out.println("\033[0;31m  Неверная команда!!! Введите команду help что бы увидить список команд \033[0m");
             }
             if (exist) break;
@@ -92,7 +92,7 @@ public class Twitter {
         try {
             userHolder.setUserList(fileService.getAllUsersFromFile());
             postHolder.setPostAllHolder(fileService.getAllPostsFromFile(userHolder.getUserList()));
-        } catch (IOException e) {
+        } catch (IOException | FileDataHolderException e) {
             try {
                 if (fileService.createFile("PostData.txt"))
                     System.out.println("\033[0;32m Был создан файл для хранения Публикаций! \033[0m");
@@ -100,9 +100,6 @@ public class Twitter {
                 System.out.println("\033[0;31m" + e.getClass().getName() + ": " + e.getMessage());
                 System.out.println("\033[0m");
             }
-        } catch (FileDataHolderException e) {
-            System.out.println(userHolder.getAllUsers());
-            throw new RuntimeException(e);
         }
     }
 }

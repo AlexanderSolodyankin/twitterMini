@@ -10,10 +10,10 @@ import service.impl.PostServiceImpl;
 
 import java.io.IOException;
 
-public class AllPosts implements CommandExistential {
+public class AllPostsCommand implements CommandExistential {
    private PostService postService;
 
-    public AllPosts() {
+    public AllPostsCommand() {
         postService = new PostServiceImpl();
     }
 

@@ -12,11 +12,11 @@ import service.impl.PostServiceImpl;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class PostsByUserType implements CommandExistential {
+public class PostsByUserTypeCommand implements CommandExistential {
     private Scanner scan;
     private PostService postService;
 
-    public PostsByUserType() {
+    public PostsByUserTypeCommand() {
         scan = new Scanner(System.in);
         postService = new PostServiceImpl();
     }

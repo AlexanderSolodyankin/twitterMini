@@ -123,7 +123,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
     @Override
     public User setPerson(User user) throws DateUserException, UserException {
-        Person person = (Person) user;
         System.out.print("Введите имя: ");
         String name = scan.nextLine();
         if (name == null || name.isEmpty()) throw new UserException("Имя не должно быть пустым! Операция прервана");
@@ -132,17 +131,16 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         if (serName == null || serName.isEmpty())
             throw new UserException("Фамилия не должна быть пустой! Операция прервана");
 
-        person
+        ((Person)user)
                 .setName(name)
                 .setSerName(serName)
                 .setDataBerth(setData(user.getUserType()));
 
-        return person;
+        return user;
     }
 
     @Override
     public User setOrganization(User user) throws DateUserException, UserException {
-        Organization organization = (Organization) user;
         System.out.print("Введите название организации: ");
         String name = scan.nextLine();
         if (name == null || name.isEmpty()) throw new UserException("Имя не должно быть пустым! Операция прервана");
@@ -152,11 +150,11 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         if (occupation == null || occupation.isEmpty())
             throw new UserException("Род занятости не должно быть пустым! Операция прервана");
 
-        organization
+        ((Organization)user)
                 .setName(name)
                 .setOccupation(occupation)
                 .setDataFounding(setData(user.getUserType()));
-        return organization;
+        return user;
     }
 
     private LocalDate setData(UserType userType) throws DateUserException {

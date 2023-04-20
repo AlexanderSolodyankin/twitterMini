@@ -7,11 +7,11 @@ import service.impl.PostServiceImpl;
 
 import java.util.Scanner;
 
-public class PostsByTag implements CommandExistential {
+public class PostsByTagCommand implements CommandExistential {
     private Scanner scan;
     private PostService postService;
 
-    public PostsByTag() {
+    public PostsByTagCommand() {
         scan = new Scanner(System.in);
         postService = new PostServiceImpl();
     }

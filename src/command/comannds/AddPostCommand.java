@@ -11,11 +11,11 @@ import service.impl.PostServiceImpl;
 
 import java.io.IOException;
 
-public class AddPost implements CommandExistential {
+public class AddPostCommand implements CommandExistential {
     private PostService postService;
     private UserHolder userHolder;
 
-    public AddPost() {
+    public AddPostCommand() {
         postService = new PostServiceImpl();
         userHolder = UserHolder.getInstance();
     }

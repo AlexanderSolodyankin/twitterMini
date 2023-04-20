@@ -18,11 +18,11 @@ public class CommandFactory {
         if (commandIn.equals("info")) return new InfoCommand();
         if (commandIn.equals("info_all")) return new InfoAllCommand();
         if (commandIn.equals("info_by_login")) return new InfoByLoginCommand();
-        if (commandIn.equals("add_post")) return new AddPost();
-        if (commandIn.equals("all_posts")) return new AllPosts();
-        if (commandIn.equals("my_posts")) return new MyPosts();
-        if (commandIn.equals("posts_by_login")) return new PostsByLogin();
-        if (commandIn.equals("posts_by_type")) return new PostsByUserType();
+        if (commandIn.equals("add_post")) return new AddPostCommand();
+        if (commandIn.equals("all_posts")) return new AllPostsCommand();
+        if (commandIn.equals("my_posts")) return new MyPostsCommand();
+        if (commandIn.equals("posts_by_login")) return new PostsByLoginCommand();
+        if (commandIn.equals("posts_by_type")) return new PostsByUserTypeCommand();
 
         return null;
     }

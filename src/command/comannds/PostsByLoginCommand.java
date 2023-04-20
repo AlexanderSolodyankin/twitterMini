@@ -8,11 +8,11 @@ import service.impl.PostServiceImpl;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class PostsByLogin implements CommandExistential {
+public class PostsByLoginCommand implements CommandExistential {
     private Scanner scan;
     private PostService postService;
 
-    public PostsByLogin() {
+    public PostsByLoginCommand() {
         scan = new Scanner(System.in);
         postService = new PostServiceImpl();
     }
