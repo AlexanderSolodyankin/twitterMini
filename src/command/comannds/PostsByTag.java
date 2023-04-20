@@ -5,7 +5,6 @@ import exaption.*;
 import service.PostService;
 import service.impl.PostServiceImpl;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class PostsByTag implements CommandExistential {
@@ -18,7 +17,7 @@ public class PostsByTag implements CommandExistential {
     }
 
     @Override
-    public boolean commandActive(String command) {
+    public boolean commandActive() {
         System.out.println("<<<<<<<<<< Все публикации по тэгу >>>>>>>>>>");
         System.out.print("Введите тэег для поиска: ");
         String tag = scan.nextLine();

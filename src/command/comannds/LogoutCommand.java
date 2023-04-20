@@ -16,7 +16,7 @@ public class LogoutCommand implements CommandExistential {
     }
 
     @Override
-    public boolean commandActive(String command) {
+    public boolean commandActive() {
         System.out.println("<<<<<<<<<< Выход из сисетмы >>>>>>>>>>");
         System.out.printf("До свидания: [%s] %s  \n",
                 userHolder.getUserAuthentication().getUserType(), userHolder.getUserAuthentication() instanceof Person ?

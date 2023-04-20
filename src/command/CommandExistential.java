@@ -6,6 +6,6 @@ import exaption.InputException;
 import java.io.IOException;
 
 public interface CommandExistential {
-    boolean commandActive(String command)
+    boolean commandActive()
             throws UserException, DateUserException, InputException, IOException, PostException, UserHoldException;
 }

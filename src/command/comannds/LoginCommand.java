@@ -22,7 +22,7 @@ public class LoginCommand implements CommandExistential {
     }
 
     @Override
-    public boolean commandActive(String command) throws UserHoldException, InputException {
+    public boolean commandActive() throws UserHoldException, InputException {
 
             userHolder.setUserAuthentication(authenticationService.authenticationUser());
             postHolder.setPostUserAuth(userHolder.getUserAuthentication());

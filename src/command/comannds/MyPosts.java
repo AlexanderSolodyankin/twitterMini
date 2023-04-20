@@ -21,7 +21,7 @@ public class MyPosts implements CommandExistential {
     }
 
     @Override
-    public boolean commandActive(String command)
+    public boolean commandActive()
             throws UserException, DateUserException, InputException, IOException, PostException {
         if (userHolder.getUserAuthentication() == null)
             throw new UserException("Вы должны войти в систему для данного действия!!!");

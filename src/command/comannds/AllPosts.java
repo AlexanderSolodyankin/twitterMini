@@ -18,7 +18,7 @@ public class AllPosts implements CommandExistential {
     }
 
     @Override
-    public boolean commandActive(String command)
+    public boolean commandActive()
             throws UserException, DateUserException, InputException, IOException, PostException {
         System.out.println("<<<<<<<<<< Все публикации  >>>>>>>>>>");
         System.out.println(postService.allPosts() == null? "В системе нет Публикаций!!!":

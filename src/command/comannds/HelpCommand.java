@@ -4,7 +4,7 @@ import command.CommandExistential;
 
 public class HelpCommand implements CommandExistential {
     @Override
-    public boolean commandActive(String command) {
+    public boolean commandActive() {
         System.out.println("1.\texit — Выход из программы.\n" +
                 "2.\tregister — Регистрация нового пользователя в системе\n" +
                 "3.\tlogin — Вход в систему под определенным пользователем.\n" +

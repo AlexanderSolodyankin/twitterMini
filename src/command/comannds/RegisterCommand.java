@@ -26,7 +26,7 @@ public class RegisterCommand implements CommandExistential {
     }
 
     @Override
-    public boolean commandActive(String command) throws DateUserException, InputException, UserException, IOException {
+    public boolean commandActive() throws DateUserException, InputException, UserException, IOException {
 
         if (userHolder.getUserAuthentication() == null)
             throw new UserException("Для данного действия вы должны выйти из системы!!!");

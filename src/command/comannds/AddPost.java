@@ -21,7 +21,7 @@ public class AddPost implements CommandExistential {
     }
 
     @Override
-    public boolean commandActive(String command)
+    public boolean commandActive()
             throws UserException, DateUserException, InputException, IOException, PostException {
         System.out.println("<<<<<<<<<<< Создание новой публикации >>>>>>>>>>");
         System.out.println("Созданна публикация " + postService.createPost(userHolder.getUserAuthentication()));

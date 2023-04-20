@@ -21,7 +21,7 @@ public class PostsByUserType implements CommandExistential {
         postService = new PostServiceImpl();
     }
     @Override
-    public boolean commandActive(String command)
+    public boolean commandActive()
             throws UserException, DateUserException, InputException, IOException, PostException {
         System.out.println("<<<<<<<<<< Все публикации по типу пользователя >>>>>>>>>>");
         System.out.println("Введите тип пользователя для поиска публикаций. 0 - человек, 1 - организация");

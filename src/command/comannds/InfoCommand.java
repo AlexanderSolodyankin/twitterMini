@@ -12,7 +12,7 @@ public class InfoCommand implements CommandExistential {
     }
 
     @Override
-    public boolean commandActive(String command) throws UserException {
+    public boolean commandActive() throws UserException {
         if (userHolder.getUserAuthentication() == null)
             throw new UserException("Для выполнения данной команды вы должны войти в систему!!!");
         System.out.println("<<<<<<<<<< Информация о пользователе >>>>>>>>>>");

@@ -7,15 +7,15 @@ import holder.UserHolder;
 
 import java.util.List;
 
-public class InfoAll implements CommandExistential {
+public class InfoAllCommand implements CommandExistential {
     UserHolder userHolder;
 
-    public InfoAll() {
+    public InfoAllCommand() {
         this.userHolder = UserHolder.getInstance();
     }
 
     @Override
-    public boolean commandActive(String command) throws DateUserException {
+    public boolean commandActive() throws DateUserException {
         System.out.println("<<<<<<<<<< Информация о всех пользователях >>>>>>>>>>");
         List<User> usersListPrint = userHolder.getAllUsers();
         if (usersListPrint == null) throw new DateUserException("Хранилище Пользователей пусто!!!");

@@ -5,7 +5,6 @@ import entity.user.User;
 import exaption.*;
 import holder.UserHolder;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class InfoByLoginCommand implements CommandExistential {
@@ -18,7 +17,7 @@ public class InfoByLoginCommand implements CommandExistential {
     }
 
     @Override
-    public boolean commandActive(String command) throws UserException{
+    public boolean commandActive() throws UserException{
         System.out.println("<<<<<<<<<< Информация о пользователе по логину >>>>>>>>>>");
         System.out.println("Введите логин пользователя о котором хотите узнать ");
         String login = scan.nextLine();

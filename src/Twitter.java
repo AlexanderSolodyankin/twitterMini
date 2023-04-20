@@ -14,7 +14,6 @@ import service.impl.UserAuthenticationServiceImpl;
 import service.impl.UserRegistrationServiceImpl;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Twitter {
 
@@ -52,26 +51,26 @@ public class Twitter {
     }
 
 
-    public void start() {
-        Scanner in = new Scanner(System.in);
+    public void start(){
+
         String commandIn;
+        CommandExistential commandExistential;
 
         while (true) {
-            System.out.print("Введите команду: ");
-            commandIn = in.nextLine();
-            CommandExistential commandExistential;
+            commandExistential = CommandFactory.getCommand();
+
+
+            boolean exist = false;
             try {
-                commandExistential = CommandFactory.getCommand(commandIn);
-                if (commandExistential != null) {
-                    if (commandExistential.commandActive(commandIn)) return;
-                } else throw new IllegalArgumentException();
-            } catch (IllegalArgumentException e) {
-                System.out.println("\033[0;31m  Неверная команда!!! Введите команду help что бы увидить список команд \033[0m");
+                exist = commandExistential.commandActive();
             } catch (UserException | DateUserException | InputException | IOException | PostException |
                      UserHoldException e) {
                 System.out.println("\033[0;31m" + e.getClass().getName() + ": " + e.getMessage());
                 System.out.println("\033[0m");
+            }catch (NullPointerException e){
+                System.out.println("\033[0;31m  Неверная команда!!! Введите команду help что бы увидить список команд \033[0m");
             }
+            if (exist) break;
         }
     }
 
@@ -89,7 +88,7 @@ public class Twitter {
         }
     }
 
-    private void threadCreatePostsFileData() { // Попытка пихнуть поток вынес в меод что бы не громаздить код
+    private void threadCreatePostsFileData() {
         try {
             userHolder.setUserList(fileService.getAllUsersFromFile());
             postHolder.setPostAllHolder(fileService.getAllPostsFromFile(userHolder.getUserList()));
@@ -106,6 +105,4 @@ public class Twitter {
             throw new RuntimeException(e);
         }
     }
-
-
 }
