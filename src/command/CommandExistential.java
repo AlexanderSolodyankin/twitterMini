@@ -7,5 +7,5 @@ import java.io.IOException;
 
 public interface CommandExistential {
     boolean commandActive(String command)
-            throws UserException, DateUserException, InputException, IOException, PostException;
+            throws UserException, DateUserException, InputException, IOException, PostException, UserHoldException;
 }

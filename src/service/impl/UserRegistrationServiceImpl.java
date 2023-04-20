@@ -44,7 +44,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         } else if (userType == 1) {
             user = new Organization();
         } else {
-            throw new InputUserTypeException("Неверное зночение для типа пользователя!");
+            throw new UserException("Неверное зночение для типа пользователя!");
         }
         System.out.print("Введите логин: ");
         String login = scan.nextLine();

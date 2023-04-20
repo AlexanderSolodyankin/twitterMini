@@ -3,6 +3,7 @@ package command.comannds;
 import command.CommandExistential;
 import entity.user.Organization;
 import entity.user.Person;
+import exaption.InputException;
 import exaption.UserHoldException;
 import holder.PostHolder;
 import holder.UserHolder;
@@ -21,8 +22,8 @@ public class LoginCommand implements CommandExistential {
     }
 
     @Override
-    public boolean commandActive(String command) {
-        try {
+    public boolean commandActive(String command) throws UserHoldException, InputException {
+
             userHolder.setUserAuthentication(authenticationService.authenticationUser());
             postHolder.setPostUserAuth(userHolder.getUserAuthentication());
             System.out.printf("<<<<<<<<<< Добро пожалывать, [%s] %s! >>>>>>>>>> \n",
@@ -30,10 +31,7 @@ public class LoginCommand implements CommandExistential {
                             ((Person) userHolder.getUserAuthentication()).getName() + " "
                                     + ((Person) userHolder.getUserAuthentication()).getSerName() :
                             ((Organization) userHolder.getUserAuthentication()).getName());
-        } catch (InputPasswordException | UserHoldException e) {
-            System.out.println("\033[0;31m" + e.getClass().getName() + ": " + e.getMessage());
-            System.out.println("\033[0m");
-        }
+
         return false;
     }
 }

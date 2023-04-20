@@ -68,7 +68,7 @@ public class Twitter {
             } catch (IllegalArgumentException e) {
                 System.out.println("\033[0;31m  Неверная команда!!! Введите команду help что бы увидить список команд \033[0m");
             } catch (UserException | DateUserException | InputException | IOException | PostException |
-                     DatePostException e) {
+                     UserHoldException e) {
                 System.out.println("\033[0;31m" + e.getClass().getName() + ": " + e.getMessage());
                 System.out.println("\033[0m");
             }

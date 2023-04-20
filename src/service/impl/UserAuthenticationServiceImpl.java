@@ -1,6 +1,7 @@
 package service.impl;
 
 import entity.user.User;
+import exaption.InputException;
 import exaption.UserHoldException;
 import holder.UserHolder;
 import service.UserAuthenticationService;
@@ -15,7 +16,7 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
     }
 
     @Override
-    public User authenticationUser() throws UserHoldException, InputPasswordException {
+    public User authenticationUser() throws UserHoldException, InputException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("<<<<<<<<<<  Вход в систему >>>>>>>>>>");
         System.out.print("Введите логин: ");
@@ -27,7 +28,7 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
         System.out.print("Введите пароль: ");
         String password = scanner.nextLine();
         if (!user.getPassword().equals(password)){
-                throw new InputPasswordException("Неверный логин или пароль");
+                throw new InputException("Неверный логин или пароль");
         }
         System.out.println("Вход в систему прощол успешно");
         return user;
