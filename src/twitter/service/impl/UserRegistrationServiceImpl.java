@@ -47,29 +47,10 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             throw new UserException("Неверное зночение для типа пользователя!");
         }
         System.out.print("Введите логин: ");
-        String login = scan.nextLine(); /* овторил ввод строки так как это костыль от пропуска как поступить по другому не знаю */
-        while (true) {
-            login = scan.nextLine();
-//  ==================== Из за сканера непонятки на всяк написал ========================================
-     /* если сночало ввести числовое зночение то следующий ввод строки сканет пропускает по непонятной пречине
-         Пришлось на всякий случай написать такой костль так как не хотел дублировать строку ввода в итоге в консоль всегда
-             и увлекся игрой с исключениями решил это оставить так чисто ддля демонстрации ученикам (если одобришь)
-     */
- /**/            try {                                                                                    /**/
- /**/                if (login == null || login.isEmpty()) {                                              /**/
- /**/                    throw new InputSystemType("Системная ошибка ввода Повторите ввод");              /**/
- /**/                }                                                                                    /**/
- /**/            } catch (InputSystemType e) {                                                            /**/
- /**/                System.err.println(e.getClass().getName() + ": " + e.getMessage());                  /**/
- /**/                login = scan.nextLine();                                                             /**/
- /**/            }                                                                                        /**/
-//  ===========================================================================================================
+        String login = scan.nextLine();
+        login = scan.nextLine();
 
-            if (!login.isEmpty()) {
-                break;
-            }
-        }
-        if (!login.matches("[a-zA-Z]+") || (login.length() > 11)) {
+        if (!login.matches("[\\w^\\s]+") || (login.length() > 11) || login.isEmpty()) {
             throw new InputException("Неверный формат логина. Регистрация прервана");
         }
 
@@ -86,13 +67,13 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             System.out.print("Повторите созданый пароль:");
             String password2 = scan.nextLine();
             /* Регулярное выражение на проверку пароля на валидацию */
-            if(password1.matches(
+            if (password1.matches(
                     "^" + /* Ночало проверки строки */
-                    "(?=.*[A-Z])" + /*  хотябы одна из перечисленых заглавных букв  */
-                    "(?=.*[0-9])" +/* хотябы одна из перечисленных цифр*/
-                    "(?=.*[!@#$%^&*_№?])" +/* проверяем на перечисленные символы */
-                    "[^\\s]" +/* отрицание пробела в условии */
-                    "+$"/* конец строки проверки */
+                            "(?=.*[A-Z])" + /*  хотябы одна из перечисленых заглавных букв  */
+                            "(?=.*[0-9])" +/* хотябы одна из перечисленных цифр*/
+                            "(?=.*[!@#$%^&*_№?])" +/* проверяем на перечисленные символы */
+                            "[^\\s]" +/* отрицание пробела в условии */
+                            "+$"/* конец строки проверки */
             )) {
                 break;/* Останавливаем цикл что бы пойти дальше */
             } else {
@@ -112,9 +93,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         }
 
         user   /* Если проверки все проши успешно заночим данные в пользователя */
-            .setLogin(login)
-            .setPassword(password1)
-            .setDataRegister(LocalDateTime.now());
+                .setLogin(login)
+                .setPassword(password1)
+                .setDataRegister(LocalDateTime.now());
 
         if (user.getUserType() == UserType.PERSON) {
             user = setPerson(user);
@@ -132,10 +113,10 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             throw new UserException("Имя должно начинаться с большой буквы и не должно быть пустым! Операция прервана");
         System.out.print("Введите Фамилию: ");
         String serName = scan.nextLine();
-        if (serName == null || serName.isEmpty() || serName.matches("^(?=.*[A-Z])[^\\s]+$") )
+        if (serName == null || serName.isEmpty() || serName.matches("^(?=.*[A-Z])[^\\s]+$"))
             throw new UserException("Фамилия должна начинаться с большой буквы и не должно быть пустым! Операция прервана");
 
-        ((Person)user)
+        ((Person) user)
                 .setName(name)
                 .setSerName(serName)
                 .setDataBerth(setData(user.getUserType(), 5));
@@ -154,7 +135,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         if (occupation == null || occupation.isEmpty())
             throw new UserException("Род занятости не должно быть пустым! Операция прервана");
 
-        ((Organization)user)
+        ((Organization) user)
                 .setName(name)
                 .setOccupation(occupation)
                 .setDataFounding(setData(user.getUserType(), 5));
@@ -165,7 +146,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
         if (userType == UserType.ORGANIZATION) {
             System.out.print("Введите дату основания в формате гггг-мм-дд: ");
-        }else System.out.print("Введите день рождения в формате гггг-мм-дд: ");
+        } else System.out.print("Введите день рождения в формате гггг-мм-дд: ");
 
         String founding = scan.nextLine();
         LocalDate date;
@@ -180,7 +161,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
                 throw new DateUserException("Возраст организации не должен быть менее 31 дня!!! Операция прервана ");
 
         } catch (DateTimeParseException e) {
-            if(limit <= 0) throw new DateUserException("Слишком много попыток ввода даты операция регистрации прервана!");
+            if (limit <= 0)
+                throw new DateUserException("Слишком много попыток ввода даты операция регистрации прервана!");
             System.out.println("\033[0;31m" + e.getClass().getName() + ": " +
                     "Неверный формат даты введите дату в формате год-месяц-день пример: " + LocalDate.now());
             System.out.println("\033[0m");
