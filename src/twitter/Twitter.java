@@ -55,7 +55,7 @@ public class Twitter {
 
     public void start() {
 
-        String commandIn;
+
         CommandExistential commandExistential;
 
         while (true) {

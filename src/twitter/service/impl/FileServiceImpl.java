@@ -34,12 +34,12 @@ public class FileServiceImpl implements FileService {
     public boolean writeUserFileData(List<User> users) throws IOException {
         FileWriter writer = new FileWriter("UserData.txt");
         int fileSizeBefore = (int) new File("UserData.txt").length();
-        for (User user : users){
+        for (User user : users) {
             String userLine = String.format("{%s}{%s}{%s}{%s}{%s}{%s}{%s}{%s}\n",
-                    user.getId(), user.getLogin(),user.getPassword(), user.getDataRegister(), user.getUserType(),
-                    user instanceof Person? ((Person)user).getName() : ((Organization)user).getName(),
-                    user instanceof Person? ((Person)user).getSerName() : ((Organization)user).getOccupation(),
-                    user instanceof Person? ((Person)user).getDataBerth() : ((Organization)user).getDataFounding());
+                    user.getId(), user.getLogin(), user.getPassword(), user.getDataRegister(), user.getUserType(),
+                    user instanceof Person ? ((Person) user).getName() : ((Organization) user).getName(),
+                    user instanceof Person ? ((Person) user).getSerName() : ((Organization) user).getOccupation(),
+                    user instanceof Person ? ((Person) user).getDataBerth() : ((Organization) user).getDataFounding());
             writer.write(userLine);
         }
         writer.close();
@@ -51,10 +51,10 @@ public class FileServiceImpl implements FileService {
         FileWriter writer = new FileWriter("PostData.txt");
         int fileSizeBefore = (int) new File("PostData.txt").length();
 
-        for (Post el : postList){
+        for (Post el : postList) {
             writer.write(String.format("{%s}{%s}{%s}{%s}{%s}{%s}\n",
-                    el.getId(),el.getAuthor().getLogin(), el.getThem()
-                    ,el.getText(),el.getTags(), el.getDatePosts()));
+                    el.getId(), el.getAuthor().getLogin(), el.getThem()
+                    , el.getText(), el.getTags(), el.getDatePosts()));
         }
         writer.close();
         return fileSizeBefore != (int) new File("PostData.txt").length();
@@ -65,12 +65,12 @@ public class FileServiceImpl implements FileService {
         List<String> userListLine = new ArrayList<>();
         FileReader reader = new FileReader("UserData.txt");
         Scanner scan = new Scanner(reader);
-        while (scan.hasNext()){
+        while (scan.hasNext()) {
             userListLine.add(scan.nextLine());
         }
         reader.close();
         List<User> userList = new ArrayList<>();
-        for(String el : userListLine) {
+        for (String el : userListLine) {
             el = el.replace("{", "");
             String[] result = el.split("}");
             int id = Integer.parseInt(result[0]);
@@ -82,7 +82,60 @@ public class FileServiceImpl implements FileService {
             String secondName = result[6];
             LocalDate dateBerth = LocalDate.parse(result[7]);
             User user;
-            if(userType.equals(UserType.PERSON)){
+            if (userType.equals(UserType.PERSON)) {
+
+                user = new Person()
+                                 .setName(name)
+                                 .setSerName(secondName)
+                                 .setDataBerth(dateBerth)
+                                 .setId(id)
+                                 .setLogin(login)
+                                 .setPassword(password)
+                                 .setDataRegister(registerDate);
+
+            } else {
+                user = new Organization()
+                                 .setName(name)
+                                 .setOccupation(secondName)
+                                 .setDataFounding(dateBerth)
+                                 .setId(id)
+                                 .setLogin(login)
+                                 .setPassword(password)
+                                 .setDataRegister(registerDate);
+
+            }
+            userList.add(user);
+        }
+        return userList;
+    }
+
+    @Override
+    public List<User> getAllUsersFromFile(String fileName) throws IOException {
+        if (!fileName.contains(".txt")) throw new IOException("Неверный формат файла!!!");
+
+        List<String> userListLine = new ArrayList<>();
+        FileReader reader = new FileReader(fileName);
+        Scanner scan = new Scanner(reader);
+
+        while (scan.hasNext()) {
+            userListLine.add(scan.nextLine());
+        }
+        reader.close();
+
+        List<User> userList = new ArrayList<>();
+        for (String el : userListLine) {
+            el = el.replace("{", "");
+            String[] result = el.split("}");
+            int id = Integer.parseInt(result[0]);
+            String login = result[1];
+            String password = result[2];
+            LocalDateTime registerDate = LocalDateTime.parse(result[3]);
+            UserType userType = UserType.valueOf(result[4]);
+            String name = result[5];
+            String secondName = result[6];
+            LocalDate dateBerth = LocalDate.parse(result[7]);
+            User user;
+            if (userType.equals(UserType.PERSON)) {
                 Person person = new Person();
                 person
                         .setName(name)
@@ -93,62 +146,8 @@ public class FileServiceImpl implements FileService {
                         .setPassword(password)
                         .setDataRegister(registerDate);
                 user = person;
-            }else {
-                Organization organization = new Organization();
-                organization
-                        .setName(name)
-                        .setOccupation(secondName)
-                        .setDataFounding(dateBerth)
-                        .setId(id)
-                        .setLogin(login)
-                        .setPassword(password)
-                        .setDataRegister(registerDate);
-                user = organization;
-            }
-            userList.add(user);
-        }
-        return userList;
-    }
 
-    @Override
-    public List<User> getAllUsersFromFile(String fileName) throws IOException {
-        if(!fileName.contains(".txt")) throw new IOException("Неверный формат файла!!!");
-
-        List<String> userListLine = new ArrayList<>();
-        FileReader reader = new FileReader(fileName);
-        Scanner scan = new Scanner(reader);
-
-        while (scan.hasNext()){
-            userListLine.add(scan.nextLine());
-        }
-        reader.close();
-
-        List<User> userList = new ArrayList<>();
-        for(String el : userListLine) {
-            el = el.replace("{", "");
-            String[] result = el.split("}");
-            int id = Integer.parseInt(result[0]);
-            String login = result[1];
-            String password = result[2];
-            LocalDateTime registerDate = LocalDateTime.parse(result[3]);
-            UserType userType = UserType.valueOf(result[4]);
-            String name = result[5];
-            String secondName = result[6];
-            LocalDate dateBerth = LocalDate.parse(result[7]);
-            User user;
-            if(userType.equals(UserType.PERSON)){
-              Person person = new Person();
-              person
-                      .setName(name)
-                      .setSerName(secondName)
-                      .setDataBerth(dateBerth)
-                      .setId(id)
-                      .setLogin(login)
-                      .setPassword(password)
-                      .setDataRegister(registerDate);
-              user = person;
-
-            }else {
+            } else {
                 Organization organization = new Organization();
                 organization
                         .setName(name)
@@ -170,21 +169,21 @@ public class FileServiceImpl implements FileService {
         List<String> postListLine = new ArrayList<>();
         FileReader postReader = new FileReader("PostData.txt");
         Scanner scanner = new Scanner(postReader);
-        while (scanner.hasNext()){
+        while (scanner.hasNext()) {
             postListLine.add(scanner.nextLine());
         }
         postReader.close();
 
         List<Post> readPostsList = new ArrayList<>();
-        for(String el : postListLine){
-            el = el.replace("{","");
+        for (String el : postListLine) {
+            el = el.replace("{", "");
             String[] postParams = el.split("}");
             int id = Integer.parseInt(postParams[0]);
             User user = userList.stream()
                     .filter(x -> x.getLogin().equals(postParams[1]))
                     .findFirst()
                     .orElse(null);
-            if(user == null){
+            if (user == null) {
                 throw new FileDataHolderException("Пользователь не существует");
             }
             String them = postParams[2];
@@ -207,26 +206,26 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<Post> getAllPostsFromFile(String fileName, List<User> userList) throws IOException, FileDataHolderException {
-        if(!fileName.contains(".txt")) throw new IOException("Неверный формат файла!!!");
+        if (!fileName.contains(".txt")) throw new IOException("Неверный формат файла!!!");
 
         List<String> postListLine = new ArrayList<>();
         FileReader postReader = new FileReader(fileName);
         Scanner scanner = new Scanner(postReader);
-        while (scanner.hasNext()){
+        while (scanner.hasNext()) {
             postListLine.add(scanner.nextLine());
         }
         postReader.close();
 
         List<Post> readPostsList = new ArrayList<>();
-        for(String el : postListLine){
-            el = el.replace("{","");
+        for (String el : postListLine) {
+            el = el.replace("{", "");
             String[] postParams = el.split("}");
             int id = Integer.parseInt(postParams[0]);
             User user = userList.stream()
                     .filter(x -> x.getLogin().equals(postParams[1]))
                     .findFirst()
                     .orElse(null);
-            if(user == null){
+            if (user == null) {
                 throw new FileDataHolderException("Пользователь не существует");
             }
             String them = postParams[2];
